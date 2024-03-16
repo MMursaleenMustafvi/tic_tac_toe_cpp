@@ -1,31 +1,35 @@
 #include<iostream>
 #include<string>
 #include<iomanip>
+#include<windows.h>
 using namespace std;
 string player1, player2;
 char firstplayer[3][3];
 char secoundplayer[3][3];
 char t[3][3];
-int i,j,c=0;
+int i, j, c = 0;
 int pointA = 0;
 int pointB = 0;
 int totalrowcol = 3;
 char n = 'y';
 void table()
 {
-	
+	HANDLE color = GetStdHandle(STD_OUTPUT_HANDLE);
 	for (int i = 0; i < 3; i++)
 	{
 		for (int j = 0; j < 3; j++)
 		{
-			t[i][j] ='-';
+			SetConsoleTextAttribute(color, 15);
+			t[i][j] = '-';
 		}
-	} 
+	}
 }
 void rule()
 {
+	HANDLE color = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(color, 11);
 	cout << "*" << setw(26) << setfill('*') << "*" << endl;
-	cout << "*" <<"      *WELLCOME*         *\n";
+	cout << "*" << "      *WELLCOME*         *\n";
 	cout << "*" << "     TIC_TAC_TOE GAME    *\n";
 	cout << "*" << "         RULES           *\n";
 	cout << "*" << "  SELECT ROW AND COLMN   *\n";
@@ -33,35 +37,41 @@ void rule()
 }
 void printtable()
 {
-	
+	HANDLE color = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(color, 13);
 	cout << "*" << setw(26) << setfill('*') << "*" << endl;
+	SetConsoleTextAttribute(color, 10);
 	cout << "* column |";
 	for (int c = 0; c < 3; c++)
 	{
 		cout << "   " << c;
 	}
-	cout<<"    *"<< endl;
+	SetConsoleTextAttribute(color, 13);
+	cout << "    *" << endl;
 	cout << "*" << setw(26) << setfill('*') << "*" << endl;
 	for (int i = 0; i < 3; i++)
 	{
-		cout << "* ROW : "<<i<<"|"<<" ";
+		SetConsoleTextAttribute(color, 10);
+		cout << "* ROW : " << i << "|" << " ";
 		for (int j = 0; j < 3; j++)
 		{
-			cout<<"  "<< t[i][j] << " ";
+			SetConsoleTextAttribute(color, 15);
+			cout << "  " << t[i][j] << " ";
 		}
+		SetConsoleTextAttribute(color, 13);
 		cout << "   *" << endl;
 	}
-	cout << "*" << setw(26) << setfill('*') << "*" << endl;
-	cout <<"@muhammadmursaleenmustafvi*\n";
+
+	SetConsoleTextAttribute(color, 13);
 	cout << "*" << setw(26) << setfill('*') << "*" << endl;
 
 }
 bool gamecheckp1()
 {
-	bool check = false; 
-	if (t[i][j] != '-'&&i>=0&&i<3 && j >= 0 && j<3&&t[i][j]=='O')
+	bool check = false;
+	if (t[i][j] != '-'&&i >= 0 && i<3 && j >= 0 && j<3 && t[i][j] == 'O')
 	{
-		if (i == 1 && j ==1)
+		if (i == 1 && j == 1)
 		{
 			if (t[i - 1][j - 1] == 'O'&& t[i + 1][j + 1] == 'O')
 			{
@@ -86,7 +96,7 @@ bool gamecheckp1()
 			{
 				return true;
 			}
-			else if (t[i][j-1] == 'O'&& t[i][j-2] == 'O')
+			else if (t[i][j - 1] == 'O'&& t[i][j - 2] == 'O')
 			{
 				return true;
 			}
@@ -97,7 +107,7 @@ bool gamecheckp1()
 			{
 				return true;
 			}
-			else if (t[i][j+1] == 'O'&& t[i][j+2] == 'O')
+			else if (t[i][j + 1] == 'O'&& t[i][j + 2] == 'O')
 			{
 				return true;
 			}
@@ -108,11 +118,11 @@ bool gamecheckp1()
 			{
 				return true;
 			}
-			else if (t[i][j+1] == 'O'&& t[i][j+2] == 'O')
+			else if (t[i][j + 1] == 'O'&& t[i][j + 2] == 'O')
 			{
 				return true;
 			}
-			else if (t[i + 1][j+1] == 'O'&& t[i + 2][j+2] == 'O')
+			else if (t[i + 1][j + 1] == 'O'&& t[i + 2][j + 2] == 'O')
 			{
 				return true;
 			}
@@ -123,7 +133,7 @@ bool gamecheckp1()
 			{
 				return true;
 			}
-			else if (t[i][j-1] == 'O'&& t[i][j+1] == 'O')
+			else if (t[i][j - 1] == 'O'&& t[i][j + 1] == 'O')
 			{
 				return true;
 			}
@@ -134,53 +144,53 @@ bool gamecheckp1()
 			{
 				return true;
 			}
-			else if (t[i][j-1] == 'O'&& t[i][j-2] == 'O')
+			else if (t[i][j - 1] == 'O'&& t[i][j - 2] == 'O')
 			{
 				return true;
 			}
-			else if (t[i + 1][j-1] == 'O'&& t[i + 2][j-2] == 'O')
+			else if (t[i + 1][j - 1] == 'O'&& t[i + 2][j - 2] == 'O')
 			{
 				return true;
 			}
 		}
 		else if (i == 2 && j == 0)
 		{
-			if (t[i - 1][j] == 'O'&& t[i-2][j] == 'O')
+			if (t[i - 1][j] == 'O'&& t[i - 2][j] == 'O')
 			{
 				return true;
 			}
-			else if (t[i][j+1] == 'O'&& t[i][j+2] == 'O')
+			else if (t[i][j + 1] == 'O'&& t[i][j + 2] == 'O')
 			{
 				return true;
 			}
-			else if (t[i-1][j + 1] == 'O'&& t[i-2][j + 2] == 'O')
+			else if (t[i - 1][j + 1] == 'O'&& t[i - 2][j + 2] == 'O')
 			{
 				return true;
 			}
 		}
 		else if (i == 2 && j == 1)
 		{
-			if (t[i - 1][j] == 'O'&& t[i-2][j] == 'O')
+			if (t[i - 1][j] == 'O'&& t[i - 2][j] == 'O')
 			{
 				return true;
 			}
-			else if (t[i][j-1] == 'O'&& t[i][j+1] == 'O')
+			else if (t[i][j - 1] == 'O'&& t[i][j + 1] == 'O')
 			{
-				
+
 				return true;
 			}
 		}
 		else if (i == 2 && j == 2)
 		{
-			if (t[i - 1][j] == 'O'&& t[i-2][j] == 'O')
+			if (t[i - 1][j] == 'O'&& t[i - 2][j] == 'O')
 			{
 				return true;
 			}
-			else if (t[i][j-1] == 'O'&& t[i][j-2] == 'O')
+			else if (t[i][j - 1] == 'O'&& t[i][j - 2] == 'O')
 			{
 				return true;
 			}
-			else if (t[i - 1][j-1] == 'O'&& t[i - 2][j-2] == 'O')
+			else if (t[i - 1][j - 1] == 'O'&& t[i - 2][j - 2] == 'O')
 			{
 				return true;
 			}
